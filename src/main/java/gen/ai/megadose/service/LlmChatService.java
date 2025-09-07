@@ -3,6 +3,7 @@ package gen.ai.megadose.service;
 import gen.ai.megadose.model.llm.LlmChatRequest;
 import gen.ai.megadose.model.llm.LlmChatResponse;
 import gen.ai.megadose.model.llm.LlmModel;
+import gen.ai.megadose.service.tool.WeatherTools;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -18,6 +19,8 @@ import java.util.List;
 public class LlmChatService {
     private final OpenAiChatModel openAiChatModel;
 
+    private final WeatherTools weatherTools;
+
     public Mono<LlmChatResponse> chatCompletion(LlmChatRequest llmChatRequest) {
         ChatClient.ChatClientRequestSpec requestSpec = getChatClient(llmChatRequest.getLlmModel())
                 .prompt(llmChatRequest.getUserRequest());
@@ -25,6 +28,8 @@ public class LlmChatService {
         if (llmChatRequest.getSystemPrompt() != null && !llmChatRequest.getSystemPrompt().isEmpty()) {
             requestSpec.system(llmChatRequest.getSystemPrompt());
         }
+
+        requestSpec.tools(weatherTools);
 
         Mono<List<String>> listMono = requestSpec
                 .stream()
