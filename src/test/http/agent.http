@@ -1,0 +1,15 @@
+### 전기차
+POST http://localhost:8080/agent/report
+Content-Type: application/json
+
+{
+  "prompt": "- 관심 기술 키워드: 전기차\n- 경쟁사 목록: Tesla, BYD\n- 관심 사이트 URL: https://www.irobotnews.com/, https://www.zdnet.co.kr\n- 리포트 범위: 기술 트렌드, 시장 규모, 경쟁사 기술 비교"
+}
+
+### 배송 로봇
+POST http://localhost:8080/agent/report
+Content-Type: application/json
+
+{
+  "prompt": "- 관심 기술 키워드: 자율주행 배송로봇\n- 경쟁사 목록: Starship Technologies, Kiwibot\n- 관심 사이트 URL: https://www.irobotnews.com/, https://www.zdnet.co.kr\n- 리포트 범위: 기술 트렌드, 미래 전망"
+}
